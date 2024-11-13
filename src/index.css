@@ -1,0 +1,12 @@
+.card-container{
+    font-size: small;
+    max-width: 400px;
+}
+
+.tabla-usuarios{
+    padding-top: 20%;
+}
+
+.tabla-usuarios a{
+    max-width: 50px;
+}
