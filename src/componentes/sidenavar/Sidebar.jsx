@@ -26,7 +26,6 @@ function Sidebar() {
         </li>
         <li className="list-group-item p-0 rounded-2">
           <Acordeon
-            icon=<i className="bi bi-journal ps-3 d-block d-md-none"></i>
             etiqueta="Bienes"
             id1="side-acordeon"
             id2="side-acordeon-a"
@@ -38,6 +37,7 @@ function Sidebar() {
                 <p className="m-0">Bienes del Área</p>
               </a>,
             ]}
+            icon=<i className="bi bi-journal ps-3 d-block d-md-none"></i>
           />
         </li>
         <li className="list-group-item p-0 rounded-2">

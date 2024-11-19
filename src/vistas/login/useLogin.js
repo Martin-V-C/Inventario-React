@@ -31,7 +31,7 @@ export const  useLogin= () =>{
           updateUser(data.depositario);
             //garda el token y el usuario en el localstorage
           localStorage.setItem("token", data.token); 
-          localStorage.setItem("dep", JSON.stringify(data.depositario));
+          localStorage.setItem("dep", JSON.stringify(data.dep));
           navigate("/home"); // Redirigir a la página de inicio
         } else {
           alert("Credenciales incorrectas");

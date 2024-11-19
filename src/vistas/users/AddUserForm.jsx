@@ -71,13 +71,11 @@ function AddUserForm() {
           onChange={handleChange}
           required
         >
-          <option value="" disabled selected>
+          <option defaultValue="" disabled>
             Seleccione un opcion
           </option>
-          <option value="2" selected>
-            Usuario
-          </option>
-          <option value="1">Administrador</option>
+          <option value="user">Usuario</option>
+          <option value="admin">Administrador</option>
         </select>
       </div>
       <div className="modal-footer">

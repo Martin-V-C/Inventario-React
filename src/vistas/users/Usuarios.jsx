@@ -50,7 +50,7 @@ function Usuarios() {
             </thead>
             <tbody>
               {data.map((usuario) => (
-                <tr>
+                <tr key={usuario.no_economico}>
                   <th scope="row">{usuario.no_economico}</th>
                   <td>{usuario.nombre}</td>
                   <td>{usuario.rol.tipo}</td>

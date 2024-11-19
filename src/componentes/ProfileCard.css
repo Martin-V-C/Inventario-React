@@ -5,6 +5,5 @@ max-width: 50%;
  @media (max-width: 991px) {
     .user-img {
         border-radius: 0;
-    }
-    
+    } 
 } 

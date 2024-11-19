@@ -36,7 +36,7 @@ export function useAddUser() {
     e.preventDefault(); // Evita que el formulario se envíe y recargue la página
     if (validateForm()) {
       try {
-        const response = await fetch("http://127.0.0.1:8080/api/depositario", {
+        const response = await fetch("http://127.0.0.1:8080/api/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

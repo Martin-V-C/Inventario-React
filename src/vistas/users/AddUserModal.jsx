@@ -1,4 +1,4 @@
-import AddUserForm from "./addUserForm";
+import AddUserForm from "./AddUserForm";
 
 function AddUserModal() {
   return (
