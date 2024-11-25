@@ -1,10 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLogin } from "./useLogin";
 
 function Login() {
-  const { updatePassword, updateUserName, handleSubmit, username, password } =
-    useLogin();
+  const { handleSubmit, handleChange, formData } = useLogin();
 
   return (
     <>
@@ -20,8 +17,9 @@ function Login() {
             <input
               type="text"
               className="form-control"
-              value={username}
-              onChange={(e) => updateUserName(e.target.value)}
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
               placeholder="Usuario"
               required
               id="username"
@@ -35,8 +33,9 @@ function Login() {
             <input
               type="password"
               className="form-control"
-              value={password}
-              onChange={(e) => updatePassword(e.target.value)}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
               placeholder="Contraseña"
               required
               id="password"

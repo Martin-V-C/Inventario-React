@@ -1,10 +1,10 @@
-import AddUserForm from "./addUserForm";
+import UpdateUserForm from "./UpdateUserForm";
 
-function AddUserModal() {
+function UpdateUserModal() {
   return (
     <div
       className="modal fade"
-      id="add-user"
+      id="update-user"
       tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -12,9 +12,7 @@ function AddUserModal() {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Añadir Usuario
-            </h1>
+            <h1 className="modal-title fs-5">Modifica Usuario: </h1>
             <button
               type="button"
               className="btn-close"
@@ -23,7 +21,7 @@ function AddUserModal() {
             ></button>
           </div>
           <div className="modal-body">
-            <AddUserForm></AddUserForm>
+            <UpdateUserForm></UpdateUserForm>
           </div>
         </div>
       </div>
@@ -31,4 +29,4 @@ function AddUserModal() {
   );
 }
 
-export default AddUserModal;
+export default UpdateUserModal;

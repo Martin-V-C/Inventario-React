@@ -1,7 +1,16 @@
-import { useAddUser } from "./useAddUser";
+import { useState } from "react";
+import useApi from "../../hooks/useAPI";
 
-function AddUserForm() {
-  const { formData, handleChange, handleSubmit, handleCancel } = useAddUser();
+function UpdateUserForm(noEco) {
+  const { get } = useApi();
+  const [data, setData] = useState([]);
+  const [formData, setFormData] = useState([]);
+
+  const getdata = async () => {
+    const url = "http://127.0.0.1:8000/api/depositarios/" + noEco;
+    const response = await get(url);
+    setFormData(response);
+  };
 
   return (
     <form>
@@ -12,52 +21,52 @@ function AddUserForm() {
         <input
           type="text"
           className="form-control"
-          id="Name"
+          id="NameUpdateForm"
           name="nombre"
-          value={formData.nombre}
-          onChange={handleChange}
+          //value={formData.nombre}
+          //onChange={handleChange}
           required
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="userNoEconomico" className="form-label">
+        <label htmlFor="NumeroEconomicoUpdateForm" className="form-label">
           Numero Economico
         </label>
         <input
           type="number"
           className="form-control"
-          id="userNoEconomico"
+          id="NumeroEconomicoUpdateForm"
           name="numeroEco"
-          value={formData.numeroEco}
-          onChange={handleChange}
+          //value={formData.numeroEco}
+          //onChange={handleChange}
           required
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="userName" className="form-label">
+        <label htmlFor="usernameUpdateForm " className="form-label">
           Nombre de usuario
         </label>
         <input
           type="text"
           className="form-control"
-          id="userName"
+          id="usernameUpdateForm"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
+          //value={formData.username}
+          //onChange={handleChange}
           required
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="UserPassword" className="form-label">
+        <label htmlFor="passwordUpdateForm" className="form-label">
           Escriba una contraseña
         </label>
         <input
           type="password"
           className="form-control"
-          id="UserPassword"
+          id="passwordUpdateForm"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
+          //value={formData.password}
+          //onChange={handleChange}
           required
         />
       </div>
@@ -65,10 +74,10 @@ function AddUserForm() {
         <label className="form-label">Rol del usuario</label>
         <select
           className="form-select"
-          id="UserRol"
+          id="rolUpdateForm"
           name="rol"
-          value={formData.rol}
-          onChange={handleChange}
+          //value={formData.rol}
+          //onChange={handleChange}
           required
         >
           <option value="" disabled>
@@ -82,7 +91,7 @@ function AddUserForm() {
         <button
           type="button"
           className="btn btn-outline-secondary"
-          onClick={handleCancel}
+          //onClick={handleCancel}
         >
           Limpiar Campos
         </button>
@@ -90,14 +99,14 @@ function AddUserForm() {
           type="button"
           className="btn btn-outline-danger"
           data-bs-dismiss="modal"
-          onClick={handleCancel}
+          //onClick={handleCancel}
         >
           Cancelar
         </button>
         <button
           type="button"
           className="btn btn-outline-primary"
-          onClick={handleSubmit}
+          //onClick={handleSubmit}
         >
           Añadir Usuario
         </button>
@@ -106,4 +115,4 @@ function AddUserForm() {
   );
 }
 
-export default AddUserForm;
+export default UpdateUserForm;

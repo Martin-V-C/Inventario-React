@@ -1,12 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import AddUserModal from "./AddUserModal";
 import { AuthContext } from "../../auth/AuthContex";
+import { useAddUser } from "./useAddUser";
+import { usseCrudUser } from "./useCrudUsers";
 import useApi from "../../hooks/useAPI";
+import UpdateUserModal from "./UpdateUserModal";
 
 function Usuarios() {
   const { get } = useApi();
   const [data, setData] = useState([]);
-
+  const { handleDelete, handleUpdate } = usseCrudUser();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,6 +40,7 @@ function Usuarios() {
         </div>
 
         <AddUserModal></AddUserModal>
+        <UpdateUserModal></UpdateUserModal>
 
         <div className="table-responsive container d-flex align-items-center px-5 pt-5">
           <table className="table table-hover table-light text-center border">
@@ -50,16 +54,26 @@ function Usuarios() {
             </thead>
             <tbody>
               {data.map((usuario) => (
-                <tr key={usuario.no_economico}>
-                  <th scope="row">{usuario.no_economico}</th>
+                <tr key={usuario.numeroEco}>
+                  <th scope="row">{usuario.numeroEco}</th>
                   <td>{usuario.nombre}</td>
                   <td>{usuario.rol.tipo}</td>
                   <td>
                     <div className="row justify-content-center">
-                      <a className="col p-0">
+                      <a
+                        onClick={() => {
+                          handleDelete(usuario.numeroEco);
+                        }}
+                        className="col p-0 "
+                      >
                         <i className="bi bi-trash3"></i>
                       </a>
-                      <a className="col p-0">
+                      <a
+                        data-bs-toggle="modal"
+                        data-bs-target="#update-user"
+                        data-bs-whatever={usuario.numeroEco}
+                        className="col p-0"
+                      >
                         <i className="bi bi-pencil"></i>
                       </a>
                     </div>

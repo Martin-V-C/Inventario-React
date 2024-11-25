@@ -8,23 +8,19 @@ const useApi = () => {
   const apiRequest = async (url, options = {}) => {
     try {
       const response = await fetch(url, {
-        options,
+        ...options,
         headers: {
-          ...options,
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
           ...options.headers,
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+      if (response.ok) {
+        return await response.json();
       }
-
-      return await response.json();
     } catch (error) {
       console.error("Error en la solicitud API:", error);
-      console.log(url);
       throw error;
     }
   };

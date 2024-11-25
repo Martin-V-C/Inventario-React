@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("dep")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
 
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
-      if (user.rol.tipo == "admin") {
+      if (user.rol.tipo == "Admin") {
         setAdmin(true);
       }
     } else {
-      localStorage.removeItem("user");
+      localStorage.removeItem("User");
     }
   }, [token, user]);
 

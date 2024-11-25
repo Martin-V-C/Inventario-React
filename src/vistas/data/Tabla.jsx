@@ -13,6 +13,7 @@ function Tabla() {
       try {
         const response = await get("http://127.0.0.1:8080/api/bienes");
         setData(response);
+        console.log(data);
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }

@@ -10,3 +10,16 @@
 .tabla-usuarios a{
     max-width: 50px;
 }
+
+.active{
+
+    background-color: gray !important;
+}
+
+a :hover{
+    cursor: pointer;
+}
+
+td,th {
+    align-content: center;
+}
