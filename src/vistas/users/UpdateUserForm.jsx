@@ -1,21 +1,33 @@
-import { useState } from "react";
-import useApi from "../../hooks/useAPI";
+import { useContext, useEffect, useState } from "react";
+import { UserDataContext } from "./UserDataContext";
+import { useCrudUser } from "./useCrudUsers";
 
-function UpdateUserForm(noEco) {
-  const { get } = useApi();
-  const [data, setData] = useState([]);
+function UpdateUserForm() {
+  const { userData } = useContext(UserDataContext);
+  const { handleUpdate } = useCrudUser();
   const [formData, setFormData] = useState([]);
 
-  const getdata = async () => {
-    const url = "http://127.0.0.1:8000/api/depositarios/" + noEco;
-    const response = await get(url);
-    setFormData(response);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        nombre: userData.nombre || "",
+        numeroEco: userData.numeroEco || "",
+        username: userData.username || "",
+        password: userData.password || "",
+        rol: userData.rol || "",
+      });
+    }
+  }, [userData]);
 
   return (
     <form>
       <div className="mb-3">
-        <label htmlFor="Name" className="form-label">
+        <label htmlFor="NameUpdateForm" className="form-label">
           Nombre del Trabajador
         </label>
         <input
@@ -23,8 +35,8 @@ function UpdateUserForm(noEco) {
           className="form-control"
           id="NameUpdateForm"
           name="nombre"
-          //value={formData.nombre}
-          //onChange={handleChange}
+          value={formData.nombre}
+          onChange={handleChange}
           required
         />
       </div>
@@ -37,8 +49,8 @@ function UpdateUserForm(noEco) {
           className="form-control"
           id="NumeroEconomicoUpdateForm"
           name="numeroEco"
-          //value={formData.numeroEco}
-          //onChange={handleChange}
+          value={formData.numeroEco}
+          onChange={handleChange}
           required
         />
       </div>
@@ -51,8 +63,8 @@ function UpdateUserForm(noEco) {
           className="form-control"
           id="usernameUpdateForm"
           name="username"
-          //value={formData.username}
-          //onChange={handleChange}
+          value={formData.username}
+          onChange={handleChange}
           required
         />
       </div>
@@ -65,8 +77,8 @@ function UpdateUserForm(noEco) {
           className="form-control"
           id="passwordUpdateForm"
           name="password"
-          //value={formData.password}
-          //onChange={handleChange}
+          value={formData.password}
+          onChange={handleChange}
           required
         />
       </div>
@@ -76,8 +88,8 @@ function UpdateUserForm(noEco) {
           className="form-select"
           id="rolUpdateForm"
           name="rol"
-          //value={formData.rol}
-          //onChange={handleChange}
+          value={formData.rol}
+          onChange={handleChange}
           required
         >
           <option value="" disabled>
@@ -90,13 +102,6 @@ function UpdateUserForm(noEco) {
       <div className="modal-footer">
         <button
           type="button"
-          className="btn btn-outline-secondary"
-          //onClick={handleCancel}
-        >
-          Limpiar Campos
-        </button>
-        <button
-          type="button"
           className="btn btn-outline-danger"
           data-bs-dismiss="modal"
           //onClick={handleCancel}
@@ -106,7 +111,10 @@ function UpdateUserForm(noEco) {
         <button
           type="button"
           className="btn btn-outline-primary"
-          //onClick={handleSubmit}
+          onClick={(e) => {
+            e.preventDefault();
+            handleUpdate(formData);
+          }}
         >
           Añadir Usuario
         </button>
@@ -114,5 +122,4 @@ function UpdateUserForm(noEco) {
     </form>
   );
 }
-
 export default UpdateUserForm;

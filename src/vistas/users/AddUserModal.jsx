@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import AddUserForm from "./addUserForm";
+import { UserDataContext } from "./UserDataContext";
 
 function AddUserModal() {
   return (
@@ -13,7 +15,7 @@ function AddUserModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Añadir Usuario
+              Añadir Usuario:
             </h1>
             <button
               type="button"

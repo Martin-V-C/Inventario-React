@@ -9,6 +9,7 @@ import Usuarios from "./vistas/users/Usuarios.jsx";
 import Inicio from "./vistas/inicio/Inicio.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthContex.jsx";
+import { UserDataProvider } from "./vistas/users/UserDataContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -27,7 +28,14 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Inicio />} />
             <Route path="inicio" element={<Inicio />} />
             <Route path="bienes" element={<Tabla />} />
-            <Route path="usuarios" element={<Usuarios />} />
+            <Route
+              path="usuarios"
+              element={
+                <UserDataProvider>
+                  <Usuarios />
+                </UserDataProvider>
+              }
+            />
           </Route>
           <Route path="*" element={<Navigate to="home" />} />
         </Routes>

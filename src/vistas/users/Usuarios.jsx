@@ -1,26 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import AddUserModal from "./AddUserModal";
-import { AuthContext } from "../../auth/AuthContex";
-import { useAddUser } from "./useAddUser";
-import { usseCrudUser } from "./useCrudUsers";
+import { useCrudUser } from "./useCrudUsers";
 import useApi from "../../hooks/useAPI";
 import UpdateUserModal from "./UpdateUserModal";
+import { UserDataContext } from "./UserDataContext";
 
 function Usuarios() {
-  const { get } = useApi();
-  const [data, setData] = useState([]);
-  const { handleDelete, handleUpdate } = usseCrudUser();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await get("http://127.0.0.1:8080/api/depositarios");
-        setData(response);
-      } catch (error) {
-        console.error("Error al obtener los datos:", error);
-      }
-    };
+  const { handleDelete, users, fetchUsers } = useCrudUser();
+  const { fetchUserData } = useContext(UserDataContext);
 
-    fetchData();
+  useEffect(() => {
+    fetchUsers();
   }, []);
 
   return (
@@ -53,7 +43,7 @@ function Usuarios() {
               </tr>
             </thead>
             <tbody>
-              {data.map((usuario) => (
+              {users.map((usuario) => (
                 <tr key={usuario.numeroEco}>
                   <th scope="row">{usuario.numeroEco}</th>
                   <td>{usuario.nombre}</td>
@@ -69,9 +59,11 @@ function Usuarios() {
                         <i className="bi bi-trash3"></i>
                       </a>
                       <a
+                        onClick={() => {
+                          fetchUserData(usuario.numeroEco);
+                        }}
                         data-bs-toggle="modal"
                         data-bs-target="#update-user"
-                        data-bs-whatever={usuario.numeroEco}
                         className="col p-0"
                       >
                         <i className="bi bi-pencil"></i>

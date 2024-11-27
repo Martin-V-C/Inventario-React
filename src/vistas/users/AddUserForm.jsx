@@ -1,7 +1,24 @@
-import { useAddUser } from "./useAddUser";
+import { useState } from "react";
+import { useCrudUser } from "./useCrudUsers";
 
 function AddUserForm() {
-  const { formData, handleChange, handleSubmit, handleCancel } = useAddUser();
+  const initialForm = {
+    numeroEco: "",
+    nombre: "",
+    username: "",
+    password: "",
+    rol: "",
+  };
+  const { handleCreate } = useCrudUser();
+  const [formData, setFormData] = useState(initialForm);
+  const handleCancel = () => {
+    setFormData(initialForm);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <form>
@@ -97,7 +114,10 @@ function AddUserForm() {
         <button
           type="button"
           className="btn btn-outline-primary"
-          onClick={handleSubmit}
+          onClick={(e) => {
+            e.preventDefault();
+            handleCreate(formData);
+          }}
         >
           Añadir Usuario
         </button>
