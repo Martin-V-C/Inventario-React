@@ -1,18 +1,8 @@
-import { useContext, useEffect, useState } from "react";
 import AddUserModal from "./AddUserModal";
-import { useCrudUser } from "./useCrudUsers";
-import useApi from "../../hooks/useAPI";
+import TablaUsuarios from "./TablaUsuarios";
 import UpdateUserModal from "./UpdateUserModal";
-import { UserDataContext } from "./UserDataContext";
 
 function Usuarios() {
-  const { handleDelete, users, fetchUsers } = useCrudUser();
-  const { fetchUserData } = useContext(UserDataContext);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   return (
     <>
       <div className="container-fluid d-flex flex-column tabla-usuarios">
@@ -28,55 +18,10 @@ function Usuarios() {
             </button>
           </div>
         </div>
-
-        <AddUserModal></AddUserModal>
-        <UpdateUserModal></UpdateUserModal>
-
-        <div className="table-responsive container d-flex align-items-center px-5 pt-5">
-          <table className="table table-hover table-light text-center border">
-            <thead>
-              <tr>
-                <th scope="col">No. Economico</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((usuario) => (
-                <tr key={usuario.numeroEco}>
-                  <th scope="row">{usuario.numeroEco}</th>
-                  <td>{usuario.nombre}</td>
-                  <td>{usuario.rol.tipo}</td>
-                  <td>
-                    <div className="row justify-content-center">
-                      <a
-                        onClick={() => {
-                          handleDelete(usuario.numeroEco);
-                        }}
-                        className="col p-0 "
-                      >
-                        <i className="bi bi-trash3"></i>
-                      </a>
-                      <a
-                        onClick={() => {
-                          fetchUserData(usuario.numeroEco);
-                        }}
-                        data-bs-toggle="modal"
-                        data-bs-target="#update-user"
-                        className="col p-0"
-                      >
-                        <i className="bi bi-pencil"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="container px-5"></div>
+        <TablaUsuarios></TablaUsuarios>
       </div>
+      <AddUserModal></AddUserModal>
+      <UpdateUserModal></UpdateUserModal>
     </>
   );
 }

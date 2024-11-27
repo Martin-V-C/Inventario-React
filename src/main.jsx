@@ -4,7 +4,7 @@ import "./index.css";
 import Login from "./vistas/login/Login.jsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Principal from "./principal.jsx";
-import Tabla from "./vistas/data/Tabla.jsx";
+import Bienes from "./vistas/bienes/Bienes.jsx";
 import Usuarios from "./vistas/users/Usuarios.jsx";
 import Inicio from "./vistas/inicio/Inicio.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
@@ -27,7 +27,7 @@ createRoot(document.getElementById("root")).render(
           >
             <Route index element={<Inicio />} />
             <Route path="inicio" element={<Inicio />} />
-            <Route path="bienes" element={<Tabla />} />
+            <Route path="bienes" element={<Bienes />} />
             <Route
               path="usuarios"
               element={

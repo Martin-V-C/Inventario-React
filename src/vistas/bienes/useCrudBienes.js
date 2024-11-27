@@ -2,56 +2,49 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../auth/AuthContex";
 import useApi from "../../hooks/useAPI";
 
+export function useAddBien() {
+  const { token } = useContext(AuthContext);
+  const { get } = useApi();
 
-export function useAddBien(){
-    const { token } = useContext(AuthContext);
-    const {get}=useApi();
-
-    const initialForm={
-        id:"",
-        descripcion:"",
-        estado:"",
-        etiqueta:"",
-        depositario:"",
-        ubicacion:"",
-    }
+  const initialForm = {
+    id: "",
+    descripcion: "",
+    estado: "",
+    etiqueta: "",
+    depositario: "",
+    ubicacion: "",
+  };
   // Crear el objeto con los datos, siguiendo el formato del DTO
   const [formData, setFormData] = useState(initialForm);
   const [depositarios, setDepositarios] = useState([]);
-  const [ubicaciones, setUbicaciones] = useState([]); 
+  const [ubicaciones, setUbicaciones] = useState([]);
 
-  useEffect(()=>{
-    const getDepositarios=async()=>{
+  useEffect(() => {
+    const getDepositarios = async () => {
       try {
         const response = await get("http://127.0.0.1:8080/api/depositarios");
-        setDepositarios(response); 
-        console.log(depositarios);    
+        setDepositarios(response);
+        console.log(depositarios);
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
-
-      
     };
-
-    
     getDepositarios();
-  },[]
-);
-useEffect(()=>{
-  const getUbicaciones=async()=>{
-    try {
-      const response = await get("http://127.0.0.1:8080/api/ubicaciones");
-      setUbicaciones(response); 
-      console.log(ubicaciones);    
-    } catch (error) {
-      console.error("Error al obtener los datos:", error);
-    }
-    
-  };
-  getUbicaciones();
-},[]
-);
-  
+  }, []);
+
+  useEffect(() => {
+    const getUbicaciones = async () => {
+      try {
+        const response = await get("http://127.0.0.1:8080/api/ubicaciones");
+        setUbicaciones(response);
+        console.log(ubicaciones);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+    getUbicaciones();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -100,6 +93,4 @@ useEffect(()=>{
     setFormData(initialForm);
   };
   return { formData, handleChange, handleSubmit, handleCancel };
-
 }
-

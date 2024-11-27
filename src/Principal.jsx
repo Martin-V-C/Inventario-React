@@ -1,8 +1,5 @@
 import Sidebar from "./componentes/sidenavar/Sidebar.jsx";
-import Tabla from "./vistas/data/Tabla.jsx";
 import TopNavar from "./componentes/navar/TopNavar.jsx";
-import Inicio from "./vistas/inicio/Inicio.jsx";
-import Usuarios from "./vistas/users/Usuarios.jsx";
 import { Outlet } from "react-router-dom";
 
 function Principal() {

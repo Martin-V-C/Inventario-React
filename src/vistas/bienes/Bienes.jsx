@@ -1,5 +1,3 @@
-import { useBienes } from "./useBienes";
-import { AuthContext } from "../../auth/AuthContex";
 import useApi from "../../hooks/useAPI";
 import { useEffect, useState } from "react";
 import AddBienModal from "./AddBienModal";

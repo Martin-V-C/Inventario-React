@@ -1,4 +1,4 @@
-import { useAddBien } from "./useAddBien";
+import { useAddBien } from "./useCrudBienes";
 
 function AddBienForm() {
   const { formData, handleCancel, handleChange, handleSubmit } = useAddBien();
